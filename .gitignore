@@ -1,0 +1,11 @@
+# Unity specific
+Temp/
+Library/
+Logs/
+Obj/
+Build/
+Builds/
+.vs/
+.vscode/
+.idea/
+.DS_Store
