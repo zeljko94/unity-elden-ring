@@ -6,13 +6,15 @@ namespace SG
 {
     public class PlayerManager : CharacterManager
     {
-        PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
+        [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
 
         protected override void Awake()
         {
             base.Awake();
 
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         }
 
         protected override void Update()
@@ -32,10 +34,10 @@ namespace SG
             if(IsOwner)
             {
                 PlayerCamera.instance.playerManager = this;
+                PlayerInputManger.instance.playerManager = this;
             }
             transform.position = new Vector3(10, -2, 2.5f);
         }
-
 
         protected override void LateUpdate()
         {

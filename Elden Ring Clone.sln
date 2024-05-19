@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParrelSync", "ParrelSync.csproj", "{C4AF5CF7-F946-D7D4-288B-6AA38CD2B188}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{EF9927F9-CD85-4C97-84D6-A91EFE29584B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{C4AF5CF7-F946-D7D4-288B-6AA38CD2B188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4AF5CF7-F946-D7D4-288B-6AA38CD2B188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4AF5CF7-F946-D7D4-288B-6AA38CD2B188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9927F9-CD85-4C97-84D6-A91EFE29584B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9927F9-CD85-4C97-84D6-A91EFE29584B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9927F9-CD85-4C97-84D6-A91EFE29584B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9927F9-CD85-4C97-84D6-A91EFE29584B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

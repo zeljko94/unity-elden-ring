@@ -23,6 +23,26 @@ namespace SG
             playerManager = GetComponent<PlayerManager>();
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            if(playerManager.IsOwner)
+            {
+                playerManager.characterNetworkManager.verticalMovement.Value = verticalMovement;
+                playerManager.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
+                playerManager.characterNetworkManager.moveAmount.Value = moveAMount;
+            }
+            else
+            {
+                moveAMount = playerManager.characterNetworkManager.moveAmount.Value;
+                verticalMovement = playerManager.characterNetworkManager.verticalMovement.Value;
+                horizontalMovement = playerManager.characterNetworkManager.horizontalMovement.Value;
+
+                playerManager.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAMount);
+            }
+        }
+
         public void HandleAllMovement()
         {
             HandleGroundedMovement();
@@ -30,7 +50,7 @@ namespace SG
             // Aerial movement
         }
 
-        private void GetVerticalAndHorizontalInputs()
+        private void GetMovementValues()
         {
             verticalMovement = PlayerInputManger.instance.verticalInput;
             horizontalMovement = PlayerInputManger.instance.horizontalInput;
@@ -41,7 +61,7 @@ namespace SG
 
         private void HandleGroundedMovement()
         {
-            GetVerticalAndHorizontalInputs();
+            GetMovementValues();
 
             Vector3 cameraForward = PlayerCamera.instance.transform.forward;
             Vector3 cameraRight = PlayerCamera.instance.transform.right;

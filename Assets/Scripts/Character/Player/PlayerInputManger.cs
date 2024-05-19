@@ -9,6 +9,7 @@ namespace SG
     public class PlayerInputManger : MonoBehaviour
     {
         public static PlayerInputManger instance;
+        public PlayerManager playerManager;
 
         PlayerControls playerControls;
 
@@ -117,6 +118,13 @@ namespace SG
             {
                 moveAmount = 1;
             }
+
+
+            if (playerManager == null)
+                return;
+
+            // why do we pass 0 horizontal, because we only want non strafing movement
+            playerManager.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
         }
     }
 }
