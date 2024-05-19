@@ -79,7 +79,7 @@ namespace SG
 
             cameraRotation = Vector3.zero;
             cameraRotation.x = upAndDownLookAngle;
-            cameraPivotTransform.localRotation = targetRotation;
+            cameraPivotTransform.localRotation = Quaternion.Euler(cameraRotation);
         }
 
         private void HandleCollisions()
