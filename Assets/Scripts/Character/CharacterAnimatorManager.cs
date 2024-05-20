@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace SG
@@ -18,11 +19,25 @@ namespace SG
 
         public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue)
         {
-            Debug.Log("Horizontal Value: " + horizontalValue.ToString());
-            Debug.Log("Vertical Value: " + verticalValue.ToString());
             characterManager.animator.SetFloat("Horizontal", horizontalValue, 0.1f, Time.deltaTime);
             characterManager.animator.SetFloat("Vertical", verticalValue, 0.1f, Time.deltaTime);
         }
 
+        public virtual void PlayTargetActionAnimation(
+            string targetAnimation, 
+            bool isPerformingAction, 
+            bool applyRootMotion = true, 
+            bool canRotate = false, 
+            bool canMove = false)
+        {
+            characterManager.applyRootMotion = applyRootMotion;
+            characterManager.animator.CrossFade(targetAnimation, 0.2f);
+
+            characterManager.isPerformingAction = isPerformingAction;
+            characterManager.canRotate = canRotate;
+            characterManager.canMove = canMove;
+
+            characterManager.characterNetworkManager.NotifyServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
     }
 }

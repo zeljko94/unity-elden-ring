@@ -13,17 +13,20 @@ namespace SG
 
         PlayerControls playerControls;
 
+
+        [Header("CAMERA MOVEMENT INPUT")]
+        [SerializeField] Vector2 cameraInput;
+        public float cameraHorizontalInput;
+        public float cameraVerticalInput;
+
         [Header("PLAYER MOVEMENT INPUT")]
         [SerializeField] Vector2 movementInput;
         public float horizontalInput;
         public float verticalInput;
         public float moveAmount;
 
-
-        [Header("CAMERA MOVEMENT INPUT")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraHorizontalInput;
-        public float cameraVerticalInput;
+        [Header("PLAYER ACTION INPUT")]
+        [SerializeField] bool dodgeInput = false;
 
         private void Awake()
         {   
@@ -64,6 +67,7 @@ namespace SG
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
 
             playerControls.Enable();
@@ -91,9 +95,17 @@ namespace SG
 
         private void Update()
         {
+            HandleAllInputs();
+        }
+
+        private void HandleAllInputs()
+        {
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
+            HandleDodgeInput();
         }
+
+        // MOVEMENT
 
         private void HandleCameraMovementInput() 
         {
@@ -125,6 +137,17 @@ namespace SG
 
             // why do we pass 0 horizontal, because we only want non strafing movement
             playerManager.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        }
+
+        // ACTIONS
+
+        private void HandleDodgeInput()
+        {
+            if(dodgeInput)
+            {
+                dodgeInput = false;
+                playerManager.playerLocomotionManager.AttemptToPerformDodge();
+            }
         }
     }
 }
